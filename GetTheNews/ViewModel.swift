@@ -9,7 +9,7 @@ import Foundation
 
 //@ObservableObject
 class ViewModel: ObservableObject {
-    var stories: [NewsItem] = []
+    @Published var stories: [NewsItem] = []
     
     func fetchTopStories() async throws {
         let url = URL(string: "https://hacker-news.firebaseio.com/v0/beststories.json")!

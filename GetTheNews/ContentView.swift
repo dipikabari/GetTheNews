@@ -14,11 +14,19 @@ struct ContentView: View {
             List(model.stories) { story in
                 Entry(story: story)
             }
+            .onAppear{
+                Task {
+                    do {
+                        try await model.fetchTopStories()
+                        print("Fetched \(model.stories.count) stories")
+                    } catch {
+                        print("Error fetching stories: \(error)")
+                    }
+                }
+            }
             .listStyle(.plain)
             .navigationTitle("News")
-            .task {
-                try? await model.fetchTopStories()
-            }
+            
         }
 }
 
